@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport(
       ciphers: 'SSLv3'
     },
     auth: {
-      user: process.env.AUTH_EMAIL || "gurdeepsingh475475@hotmail.com",
-      pass: process.env.AUTH_PASS || "Ak47@sin"
+      user: process.env.AUTH_EMAIL,
+      pass: process.env.AUTH_PASS,
     }
   }
 );
