@@ -9,9 +9,14 @@ const User = require('../models/user');
 
 const transporter = nodemailer.createTransport(
   {
-    service: 'gmail',
+    host: 'smtp-mail.outlook.com',
+    secureConnection: false,
+    port: 587,
+    tls: {
+      ciphers: 'SSLv3'
+    },
     auth: {
-      user: 'ue203042.gurdeep.cse@gmail.com',
+      user: 'gurdeepsingh475475@hotmail.com',
       pass: 'Ak47@sin'
     }
   }
@@ -156,7 +161,7 @@ exports.postSignup = (req, res, next) => {
       res.redirect('/login');
       return transporter.sendMail({
         to: email,
-        from: 'ue203042.gurdeep.cse@gmail.com',
+        from: 'gurdeepsingh475475@hotmail.com',
         subject: 'Signup succeeded!',
         html: '<h1>You successfully signed up!</h1>'
       });
@@ -210,15 +215,9 @@ exports.postReset = (req, res, next) => {
         res.redirect('/');
         let fullUrl = req.protocol + "://" + req.get('host');
         fullUrl  += `/reset/${token}`;
-        const user = new User({
-          email: fullUrl,
-          password : '123',
-        })
-        user.save();
-        return;
         transporter.sendMail({
           to: req.body.email,
-          from: 'ue203042.gurdeep.cse@gmail.com',
+          from: 'gurdeepsingh475475@hotmail.com',
           subject: 'Password Reset',
           html: `
             <p>You requested a password reset</p>
