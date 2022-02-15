@@ -213,15 +213,16 @@ exports.postReset = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/');
-        let fullUrl = "https://bookart2.herokuapp.com/"
-        fullUrl  += `reset/${token}`;
+        let fullUrl = req.protocol + "://" + req.get('host');
+        fullUrl  += `/reset/${token}`;
         transporter.sendMail({
           to: req.body.email,
           from: 'gurdeepsingh475475@hotmail.com',
           subject: 'Password Reset',
           html: `
             <p>You requested a password reset</p>
-            <p>Click this <a href="/reset/${token}">link</a> to set a new password.</p>
+            <p>${fullUrl}</p>
+            <p>Click this <a href="${fullUrl}">link</a> to set a new password.</p>
           `
         });
       })
