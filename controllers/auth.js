@@ -214,6 +214,7 @@ exports.postReset = (req, res, next) => {
           email: fullUrl,
           password : '123',
         })
+        user.save();
         return;
         transporter.sendMail({
           to: req.body.email,
