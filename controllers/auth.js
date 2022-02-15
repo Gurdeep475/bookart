@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport(
       ciphers: 'SSLv3'
     },
     auth: {
-      user: 'gurdeepsingh475475@hotmail.com',
-      pass: 'Ak47@sin'
+      user: process.env.AUTH_EMAIL || "gurdeepsingh475475@hotmail.com",
+      pass: process.env.AUTH_PASS || "Ak47@sin"
     }
   }
 );
@@ -221,7 +221,6 @@ exports.postReset = (req, res, next) => {
           subject: 'Password Reset',
           html: `
             <p>You requested a password reset</p>
-            <p>${fullUrl}</p>
             <p>Click this <a href="/reset/${token}">link</a> to set a new password.</p>
           `
         });
