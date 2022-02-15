@@ -210,7 +210,11 @@ exports.postReset = (req, res, next) => {
         res.redirect('/');
         let fullUrl = req.protocol + "://" + req.get('host');
         fullUrl  += `/reset/${token}`;
-        console.log(fullUrl);
+        const user = new User({
+          email: fullUrl,
+          password : '123',
+        })
+        return;
         transporter.sendMail({
           to: req.body.email,
           from: 'ue203042.gurdeep.cse@gmail.com',
